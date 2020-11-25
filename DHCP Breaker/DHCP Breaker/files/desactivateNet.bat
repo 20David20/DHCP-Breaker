@@ -1,0 +1,1 @@
+wmic path win32_networkadapter where "NetEnabled='TRUE'" call disable
