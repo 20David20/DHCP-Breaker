@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Diagnostics;
 using DHCP_Breaker.Properties;
+using SharpPcap;
 
 namespace DHCP_Breaker
 {
@@ -79,11 +80,11 @@ namespace DHCP_Breaker
 
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello World!");
-            int decision;
+            /*Console.WriteLine("Hello World!");
+            int action;
 
-            decision = askAction();
-            switch (decision)
+            action = askAction();
+            switch (action)
             {
                 case 1:
                     desactivateNetwork();
@@ -93,6 +94,14 @@ namespace DHCP_Breaker
                     Console.WriteLine("Error");
                     break;
             }
+
+            */
+
+            Pcap pcap = new Pcap();
+            CaptureDeviceList capture = new CaptureDeviceList();
+            string test = Pcap.Version;
+
+            Console.WriteLine(test);
         }
     }
 }

@@ -11,3 +11,17 @@ C:\Users\david\Documents\GitHub\DHCP-Breaker\DHCP Breaker\DHCP Breaker\obj\Debug
 C:\Users\david\Documents\GitHub\DHCP-Breaker\DHCP Breaker\DHCP Breaker\obj\Debug\netcoreapp2.1\DHCP Breaker.pdb
 C:\Users\david\Documents\GitHub\DHCP-Breaker\DHCP Breaker\DHCP Breaker\obj\Debug\netcoreapp2.1\DHCP_Breaker.Properties.Resources.resources
 C:\Users\david\Documents\GitHub\DHCP-Breaker\DHCP Breaker\DHCP Breaker\obj\Debug\netcoreapp2.1\DHCP Breaker.csproj.GenerateResource.cache
+C:\Users\David.DUBEY\Documents\GitHub\DHCP-Breaker\DHCP Breaker\DHCP Breaker\bin\Debug\netcoreapp2.1\DHCP Breaker.deps.json
+C:\Users\David.DUBEY\Documents\GitHub\DHCP-Breaker\DHCP Breaker\DHCP Breaker\bin\Debug\netcoreapp2.1\DHCP Breaker.runtimeconfig.json
+C:\Users\David.DUBEY\Documents\GitHub\DHCP-Breaker\DHCP Breaker\DHCP Breaker\bin\Debug\netcoreapp2.1\DHCP Breaker.runtimeconfig.dev.json
+C:\Users\David.DUBEY\Documents\GitHub\DHCP-Breaker\DHCP Breaker\DHCP Breaker\bin\Debug\netcoreapp2.1\DHCP Breaker.dll
+C:\Users\David.DUBEY\Documents\GitHub\DHCP-Breaker\DHCP Breaker\DHCP Breaker\bin\Debug\netcoreapp2.1\DHCP Breaker.pdb
+C:\Users\David.DUBEY\Documents\GitHub\DHCP-Breaker\DHCP Breaker\DHCP Breaker\obj\Debug\netcoreapp2.1\DHCP Breaker.csprojAssemblyReference.cache
+C:\Users\David.DUBEY\Documents\GitHub\DHCP-Breaker\DHCP Breaker\DHCP Breaker\obj\Debug\netcoreapp2.1\DHCP_Breaker.Properties.Resources.resources
+C:\Users\David.DUBEY\Documents\GitHub\DHCP-Breaker\DHCP Breaker\DHCP Breaker\obj\Debug\netcoreapp2.1\DHCP Breaker.csproj.GenerateResource.cache
+C:\Users\David.DUBEY\Documents\GitHub\DHCP-Breaker\DHCP Breaker\DHCP Breaker\obj\Debug\netcoreapp2.1\DHCP Breaker.AssemblyInfoInputs.cache
+C:\Users\David.DUBEY\Documents\GitHub\DHCP-Breaker\DHCP Breaker\DHCP Breaker\obj\Debug\netcoreapp2.1\DHCP Breaker.AssemblyInfo.cs
+C:\Users\David.DUBEY\Documents\GitHub\DHCP-Breaker\DHCP Breaker\DHCP Breaker\obj\Debug\netcoreapp2.1\DHCP Breaker.csproj.CoreCompileInputs.cache
+C:\Users\David.DUBEY\Documents\GitHub\DHCP-Breaker\DHCP Breaker\DHCP Breaker\obj\Debug\netcoreapp2.1\DHCP Breaker.dll
+C:\Users\David.DUBEY\Documents\GitHub\DHCP-Breaker\DHCP Breaker\DHCP Breaker\obj\Debug\netcoreapp2.1\DHCP Breaker.pdb
+C:\Users\David.DUBEY\Documents\GitHub\DHCP-Breaker\DHCP Breaker\DHCP Breaker\obj\Debug\netcoreapp2.1\DHCP Breaker.genruntimeconfig.cache
