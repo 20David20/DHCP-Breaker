@@ -1,6 +1,6 @@
 ﻿using System;
+using System.IO;
 using System.Diagnostics;
-using System.Net.NetworkInformation;
 using SharpPcap;
 using SharpPcap.LibPcap;
 using System.Threading;
@@ -215,6 +215,14 @@ namespace DHCP_Breaker
                                 Console.WriteLine("C'EST OK C'EST OK C'EST OK C'EST OK C'EST OK");
                                 Console.WriteLine();
                                 Console.WriteLine();
+
+
+                                //Soundplayer player = new SoundPlayer();
+                                // getting root path
+                                string rootLocation = typeof(Program).Assembly.Location;
+                                // appending sound location
+                                string fullPathToSound = Path.Combine(rootLocation, @"Data\Sounds\car.wav");
+                                //player.SoundLocation = fullPathToSound;
                             }
                             else
                             {

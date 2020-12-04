@@ -61,6 +61,15 @@ namespace DHCP_Breaker.Properties {
         }
         
         /// <summary>
+        ///   Recherche une ressource localisée de type System.IO.UnmanagedMemoryStream semblable à System.IO.MemoryStream.
+        /// </summary>
+        internal static System.IO.UnmanagedMemoryStream _ONTIVA_COM__Alarm_sound_effects___modern_alarm_1_HQ {
+            get {
+                return ResourceManager.GetStream("_ONTIVA_COM__Alarm_sound_effects___modern_alarm_1_HQ", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Recherche une chaîne localisée semblable à wmic path win32_networkadapter where &quot;NetEnabled=&apos;TRUE&apos;&quot; call disable.
         /// </summary>
         internal static string desactivateNet {
