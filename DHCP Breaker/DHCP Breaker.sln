@@ -3,7 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.30503.244
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DHCP Breaker", "DHCP Breaker\DHCP Breaker.csproj", "{2491AC30-B985-4476-BB87-FB4A69CEBBC6}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DHCP Breaker", "DHCP Breaker\DHCP Breaker.csproj", "{2491AC30-B985-4476-BB87-FB4A69CEBBC6}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DHCP Breaker app", "DHCP Breaker app\DHCP Breaker app.csproj", "{88F19DE6-26A6-4405-AD64-783C6EF1EFC7}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +17,10 @@ Global
 		{2491AC30-B985-4476-BB87-FB4A69CEBBC6}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2491AC30-B985-4476-BB87-FB4A69CEBBC6}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2491AC30-B985-4476-BB87-FB4A69CEBBC6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{88F19DE6-26A6-4405-AD64-783C6EF1EFC7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{88F19DE6-26A6-4405-AD64-783C6EF1EFC7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{88F19DE6-26A6-4405-AD64-783C6EF1EFC7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{88F19DE6-26A6-4405-AD64-783C6EF1EFC7}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
