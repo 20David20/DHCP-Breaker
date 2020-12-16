@@ -18,8 +18,10 @@ namespace DHCP_Breaker_app
     public partial class frmDHCPBreaker : Form
     {
 
-        private ICaptureDevice device = null;
+        private ICaptureDevice device;
         private int choice = 0;
+        private CaptureDeviceList devices;
+
 
         public frmDHCPBreaker()
         {
@@ -38,14 +40,15 @@ namespace DHCP_Breaker_app
             lstServeurDHCP.Items.Add("10.229.60.22");
             // Print SharpPcap version
             
-            
+
             string ver = SharpPcap.Version.VersionString;
             //Console.WriteLine("SharpPcap {0}, Example12.PacketManipulation.cs", ver);
             //Console.WriteLine();
 
             // Retrieve the device list
-            var devices = CaptureDeviceList.Instance;
+            devices = CaptureDeviceList.Instance;
 
+               /*
             // If no devices were found print an error
             if (devices.Count < 1)
             {
@@ -54,6 +57,7 @@ namespace DHCP_Breaker_app
             }
 
             int i = 0;
+            */
 
             // Print out the available devices
             foreach (var dev in devices)
@@ -61,9 +65,10 @@ namespace DHCP_Breaker_app
                 cmbNet.Items.Add(dev.Description);
             }
 
-            
+            /*
             device = devices[choice];
-
+            label1.Text = choice.ToString();
+            */
 
             //Register our handler function to the 'packet arrival' event
             
@@ -117,7 +122,7 @@ namespace DHCP_Breaker_app
                             {
                                 //Console.WriteLine();
                                 //Console.WriteLine();
-                                label1.Text = "C'EST OK C'EST OK C'EST OK C'EST OK C'EST OK";
+                                MessageBox.Show("C'EST OK C'EST OK C'EST OK C'EST OK C'EST OK");
                                 //Console.WriteLine();
                                 //Console.WriteLine();
 
@@ -162,13 +167,24 @@ namespace DHCP_Breaker_app
         private void cmbNet_SelectedIndexChanged(object sender, EventArgs e)
         {
             
-            label1.Text = cmbNet.SelectedItem.ToString();
-            choice = cmbNet.SelectedIndex;
+            //label1.Text = cmbNet.SelectedItem.ToString();
+
+            label1.Text = choice.ToString();
         }
 
         private void cmdStart_Click(object sender, EventArgs e)
         {
+            choice = cmbNet.SelectedIndex;
+            device = devices[choice];
             device.OnPacketArrival += new PacketArrivalEventHandler(device_OnPacketArrival);
+            device.Open();
+            device.StartCapture();
+            
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            device.StopCapture();
         }
     }
 }
