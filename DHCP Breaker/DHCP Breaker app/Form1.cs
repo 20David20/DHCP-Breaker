@@ -36,56 +36,12 @@ namespace DHCP_Breaker_app
 
         private void InitializeSoft()
         {
-
             lstServeurDHCP.Items.Add("10.229.60.22");
-            // Print SharpPcap version
-            
-
-            string ver = SharpPcap.Version.VersionString;
-            //Console.WriteLine("SharpPcap {0}, Example12.PacketManipulation.cs", ver);
-            //Console.WriteLine();
-
-            // Retrieve the device list
             devices = CaptureDeviceList.Instance;
-
-               /*
-            // If no devices were found print an error
-            if (devices.Count < 1)
-            {
-                //Console.WriteLine("No devices were found on this machine");
-                return;
-            }
-
-            int i = 0;
-            */
-
-            // Print out the available devices
             foreach (var dev in devices)
             {
                 cmbNet.Items.Add(dev.Description);
             }
-
-            /*
-            device = devices[choice];
-            label1.Text = choice.ToString();
-            */
-
-            //Register our handler function to the 'packet arrival' event
-            
-
-            // Open the device for capturing
-            //device.Open();
-
-            //Console.WriteLine();
-            //Console.WriteLine("-- Listening on {0}, hit 'Ctrl-C' to exit...",device.Description);
-
-            // Start capture 'INFINTE' number of packets
-            //device.Capture();
-
-            // Close the pcap device
-            // (Note: this line will never be called since
-            //  we're capturing infinite number of packets
-            //device.Close();
         }
 
         private void device_OnPacketArrival(object sender, CaptureEventArgs e)
@@ -100,17 +56,10 @@ namespace DHCP_Breaker_app
                 {
                     Console.WriteLine("Original IP packet: " + ip.ToString());
 
-                    //manipulate IP parameters
-                    /*ip.SourceAddress = System.Net.IPAddress.Parse("1.2.3.4");
-                    ip.DestinationAddress = System.Net.IPAddress.Parse("44.33.22.11");
-                    ip.TimeToLive = 11;*/
-
-
-
                     var udp = packet.Extract<PacketDotNet.UdpPacket>();
                     if (udp != null)
                     {
-                        MessageBox.Show("Original UDP packet: " + udp.ToString());
+                        //rtxtPackets.Text += "Original UDP packet: " + udp.ToString();
 
                         //manipulate UDP parameters
 
@@ -122,7 +71,7 @@ namespace DHCP_Breaker_app
                             {
                                 //Console.WriteLine();
                                 //Console.WriteLine();
-                                MessageBox.Show("C'EST OK C'EST OK C'EST OK C'EST OK C'EST OK");
+                                MessageBox.Show("Serveur DHCP autorisé");
                                 //Console.WriteLine();
                                 //Console.WriteLine();
 
@@ -131,21 +80,16 @@ namespace DHCP_Breaker_app
                             }
                             else
                             {
-                                //Console.WriteLine();
-                                //Console.WriteLine();
-                                label1.Text = "HAHAHAAHAAHAHAHAHAHAHHAHHHAHAHAHAHAHAHAH";
-                                //Console.WriteLine();
-                                //Console.WriteLine();
-                                desactivateNetwork();
+                                try
+                                {
+                                    MessageBox.Show("ATTENTION, SERVEUR DHCP NON AUTORISÉ DETECTÉ \n Extinction des cartes réseaux");
+                                    desactivateNetwork();
+                                }
+                                catch (ThreadAbortException)
+                                {
+                                    // exit
+                                }
                             }
-
-
-
-                            Thread.Sleep(4000);
-
-                            Console.WriteLine(udp.ToString());
-
-                            Environment.Exit(0);
                         }
                     }
                 }
@@ -154,22 +98,19 @@ namespace DHCP_Breaker_app
         }
 
 
-        static void desactivateNetwork()
+        private void desactivateNetwork()
         {
-            Process.Start("cmd", "/K wmic path win32_networkadapter where \"NetEnabled='TRUE'\" call disable"); // Start a new command prompt, execute command, but leave it open at the end.
+            Process.Start("cmd", "/K wmic path win32_networkadapter where \"NetEnabled='TRUE'\" call disable");
+            cmdNetRestart.Visible = true;
+            cmdNetRestart.Enabled = true;
         }
 
-        private void label1_Click_1(object sender, EventArgs e)
-        {
 
-        }
 
         private void cmbNet_SelectedIndexChanged(object sender, EventArgs e)
         {
             
-            //label1.Text = cmbNet.SelectedItem.ToString();
 
-            label1.Text = choice.ToString();
         }
 
         private void cmdStart_Click(object sender, EventArgs e)
@@ -178,13 +119,17 @@ namespace DHCP_Breaker_app
             device = devices[choice];
             device.OnPacketArrival += new PacketArrivalEventHandler(device_OnPacketArrival);
             device.Open();
-            device.StartCapture();
-            
+            device.StartCapture();      
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        private void cmdStop_Click(object sender, EventArgs e)
         {
             device.StopCapture();
+        }
+
+        private void cmdNetRestartClick(object sender, EventArgs e)
+        {
+            Process.Start("cmd", "/K wmic path win32_networkadapter where \"NetEnabled='FALSE'\" call enable");
         }
     }
 }

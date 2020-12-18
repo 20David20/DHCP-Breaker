@@ -33,8 +33,9 @@
             this.cmdStart = new System.Windows.Forms.Button();
             this.lstServeurDHCP = new System.Windows.Forms.ListBox();
             this.lblServeurDHCP = new System.Windows.Forms.Label();
-            this.label1 = new System.Windows.Forms.Label();
-            this.button1 = new System.Windows.Forms.Button();
+            this.cmdStop = new System.Windows.Forms.Button();
+            this.rtxtPackets = new System.Windows.Forms.RichTextBox();
+            this.cmdNetRestart = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // cmbNet
@@ -85,33 +86,45 @@
             this.lblServeurDHCP.Text = "Serveurs DHCP autorisés";
             this.lblServeurDHCP.Click += new System.EventHandler(this.label1_Click);
             // 
-            // label1
+            // cmdStop
             // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(117, 436);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(22, 15);
-            this.label1.TabIndex = 5;
-            this.label1.Text = "***";
-            this.label1.Click += new System.EventHandler(this.label1_Click_1);
+            this.cmdStop.Location = new System.Drawing.Point(404, 319);
+            this.cmdStop.Name = "cmdStop";
+            this.cmdStop.Size = new System.Drawing.Size(107, 23);
+            this.cmdStop.TabIndex = 6;
+            this.cmdStop.Text = "Stop";
+            this.cmdStop.UseVisualStyleBackColor = true;
+            this.cmdStop.Click += new System.EventHandler(this.cmdStop_Click);
             // 
-            // button1
+            // rtxtPackets
             // 
-            this.button1.Location = new System.Drawing.Point(367, 370);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 23);
-            this.button1.TabIndex = 6;
-            this.button1.Text = "button1";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
+            this.rtxtPackets.Location = new System.Drawing.Point(12, 319);
+            this.rtxtPackets.Name = "rtxtPackets";
+            this.rtxtPackets.ReadOnly = true;
+            this.rtxtPackets.Size = new System.Drawing.Size(355, 143);
+            this.rtxtPackets.TabIndex = 7;
+            this.rtxtPackets.Text = "";
+            // 
+            // cmdNetRestart
+            // 
+            this.cmdNetRestart.Enabled = false;
+            this.cmdNetRestart.Location = new System.Drawing.Point(404, 423);
+            this.cmdNetRestart.Name = "cmdNetRestart";
+            this.cmdNetRestart.Size = new System.Drawing.Size(107, 39);
+            this.cmdNetRestart.TabIndex = 8;
+            this.cmdNetRestart.Text = "Reactiver les cartes réseau";
+            this.cmdNetRestart.UseVisualStyleBackColor = true;
+            this.cmdNetRestart.Visible = false;
+            this.cmdNetRestart.Click += new System.EventHandler(this.cmdNetRestartClick);
             // 
             // frmDHCPBreaker
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(523, 485);
-            this.Controls.Add(this.button1);
-            this.Controls.Add(this.label1);
+            this.Controls.Add(this.cmdNetRestart);
+            this.Controls.Add(this.rtxtPackets);
+            this.Controls.Add(this.cmdStop);
             this.Controls.Add(this.lblServeurDHCP);
             this.Controls.Add(this.lstServeurDHCP);
             this.Controls.Add(this.cmdStart);
@@ -133,8 +146,9 @@
         private System.Windows.Forms.Button cmdStart;
         private System.Windows.Forms.ListBox lstServeurDHCP;
         private System.Windows.Forms.Label lblServeurDHCP;
-        private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button cmdStop;
+        private System.Windows.Forms.RichTextBox rtxtPackets;
+        private System.Windows.Forms.Button cmdNetRestart;
     }
 }
 
