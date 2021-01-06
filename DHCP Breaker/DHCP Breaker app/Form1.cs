@@ -1,17 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
-using System.IO;
+﻿using SharpPcap;
+using System;
 using System.Diagnostics;
-using SharpPcap;
-using SharpPcap.LibPcap;
 using System.Threading;
+using System.Windows.Forms;
+using System.Collections.Generic;
 
 namespace DHCP_Breaker_app
 {
@@ -21,7 +13,7 @@ namespace DHCP_Breaker_app
         private ICaptureDevice device;
         private int choice = 0;
         private CaptureDeviceList devices;
-
+        private List<string> allAdresses = new List<string>();
 
         public frmDHCPBreaker()
         {
@@ -36,7 +28,6 @@ namespace DHCP_Breaker_app
 
         private void InitializeSoft()
         {
-            lstServeurDHCP.Items.Add("10.229.60.22");
             devices = CaptureDeviceList.Instance;
             foreach (var dev in devices)
             {
@@ -46,6 +37,8 @@ namespace DHCP_Breaker_app
 
         private void device_OnPacketArrival(object sender, CaptureEventArgs e)
         {
+            
+
             var packet = PacketDotNet.Packet.ParsePacket(e.Packet.LinkLayerType, e.Packet.Data);
             if (packet is PacketDotNet.EthernetPacket)
             {
@@ -67,6 +60,7 @@ namespace DHCP_Breaker_app
                         if (udp.ToString().Contains("DHCPMsgType: DHCP Message Type: Ack"))
                         {
 
+                            
                             if (udp.ToString().Contains("DHCPServerId: Server Id: 10.229.60.22"))
                             {
                                 //Console.WriteLine();
@@ -115,6 +109,23 @@ namespace DHCP_Breaker_app
 
         private void cmdStart_Click(object sender, EventArgs e)
         {
+            foreach (string item in lstServeurDHCP.Items)
+            {
+                if (item.Contains(" - "))
+                {
+                    string[] componnents = item.Split(" ");
+                    foreach (string part in componnents)
+                    {
+                        Console.WriteLine(part);
+                    }
+                }
+                else
+                {
+                    allAdresses.Add(item);
+                    MessageBox.Show(item);
+                }
+            }
+
             choice = cmbNet.SelectedIndex;
             device = devices[choice];
             device.OnPacketArrival += new PacketArrivalEventHandler(device_OnPacketArrival);
@@ -155,6 +166,20 @@ namespace DHCP_Breaker_app
         private void groupBox1_Enter(object sender, EventArgs e)
         {
 
+        }
+
+        private void cmdAddSpecific_Click(object sender, EventArgs e)
+        {
+            string newAdress = txtS1b.Text + "." + txtS2b.Text + "." + txtS3b.Text + "." + txtS4b.Text;
+            lstServeurDHCP.Items.Add(newAdress);
+        }
+
+        private void cmdAddRange_Click(object sender, EventArgs e)
+        {
+            string newDeb = txtDeb1b.Text + "." + txtDeb2b.Text + "." + txtDeb3b.Text + "." + txtDeb4b.Text;
+            string newFin = txtFin1b.Text + "." + txtFin2b.Text + "." + txtFin3b.Text + "." + txtFin4b.Text;
+            string newRange = newDeb + " - " + newFin;
+            lstServeurDHCP.Items.Add(newRange);
         }
     }
 }
