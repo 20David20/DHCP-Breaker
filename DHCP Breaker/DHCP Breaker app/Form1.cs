@@ -11,6 +11,7 @@ namespace DHCP_Breaker_app
     {
 
         private ICaptureDevice device;
+        
         private int choice = 0;
         private CaptureDeviceList devices;
         private List<string> allAdresses = new List<string>();
@@ -113,11 +114,43 @@ namespace DHCP_Breaker_app
             {
                 if (item.Contains(" - "))
                 {
-                    string[] componnents = item.Split(" ");
-                    foreach (string part in componnents)
+                    string[] componnents = item.Split(' ', '.');
+
+                    /*foreach(string part in componnents)
                     {
-                        Console.WriteLine(part);
+                        MessageBox.Show(part);
+                    }*/
+
+                    /*
+                    MessageBox.Show(componnents[0]); premier octet
+                    MessageBox.Show(componnents[1]); deuxième octet
+                    MessageBox.Show(componnents[2]); troisième octet
+                    MessageBox.Show(componnents[3]); quatrième octet
+
+                    MessageBox.Show(componnents[4]); tiret
+
+                    MessageBox.Show(componnents[5]); premier octet
+                    MessageBox.Show(componnents[6]); deuxième octet
+                    MessageBox.Show(componnents[7]); troisième octet
+                    MessageBox.Show(componnents[8]); quatrième octet
+                    */
+
+                    if (Int32.Parse(componnents[0]) == Int32.Parse(componnents[5])) //Les premiers octets des deux adresses sont identiques.
+                    {
+                        if (Int32.Parse(componnents[1]) == Int32.Parse(componnents[6])) //Les deuxièmes octets des deux adresses sont identiques.
+                        {
+                            if (Int32.Parse(componnents[2]) == Int32.Parse(componnents[7])) //Les troisièmes octets des deux adresses sont identiques.
+                            {
+                                if (Int32.Parse(componnents[3]) == Int32.Parse(componnents[8])) //Les adresses de début et de fin sont les mêmes.
+                                {
+                                    //string adresseFinal
+                                    //allAdresses.Add();
+                                }
+                            }
+                        }
                     }
+                    
+
                 }
                 else
                 {
