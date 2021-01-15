@@ -10,7 +10,7 @@ namespace DHCP_Breaker_app
     public partial class frmDHCPBreaker : Form
     {
 
-        private const int MAXDECIMAL = 10;
+        private const int MAXDECIMAL = 3;
         private const int MINDECIMAL = 0;
         private ICaptureDevice device;
         
@@ -137,6 +137,9 @@ namespace DHCP_Breaker_app
                     MessageBox.Show(componnents[8]); quatrième octet
                     */
 
+
+
+
                     if (Int32.Parse(componnents[0]) == Int32.Parse(componnents[5])) //Les premiers octets des deux adresses sont identiques.
                     {
                         if (Int32.Parse(componnents[1]) == Int32.Parse(componnents[6])) //Les deuxièmes octets des deux adresses sont identiques.
@@ -244,7 +247,7 @@ namespace DHCP_Breaker_app
                                         begginingNumber = MINDECIMAL;
                                     }
 
-                                    if (ii == Int32.Parse(componnents[7]))
+                                    if (ii == Int32.Parse(componnents[7]) && (iii == Int32.Parse(componnents[6])))
                                     {
                                         endingNumber = Int32.Parse(componnents[8]);
                                     }
@@ -260,18 +263,120 @@ namespace DHCP_Breaker_app
                                     }
                                     hasLoop = true;
                                 }
-                                /*foreach (string part in allAddresses)
+                                foreach (string part in allAddresses)
                                 {
                                     MessageBox.Show(part);
-                                }*/
+                                }
                                 hasLoop2ndByte = true;
                                 hasLoop = true;
+
+                                
                             }
 
                             foreach (string part in allAddresses)
                             {
                                 MessageBox.Show(part);
                             }
+                        }
+
+                    }
+                    else
+                    {
+                        MessageBox.Show("1er octet différent");
+                        bool hasLoop1stByte = false;
+                        int begginingNumber1stByte;
+                        int endingNumber1stByte;
+
+
+                        bool hasLoop2ndByte = false;
+                        int begginingNumber2ndByte;
+                        int endingNumber2ndByte;
+
+                        bool hasLoop = false;
+                        int begginingNumber;
+                        int endingNumber;
+
+                        for (int iiii = Int32.Parse(componnents[0]); iiii <= Int32.Parse(componnents[5]); iiii++)
+                        {
+                            if (hasLoop1stByte == false)
+                            {
+                                begginingNumber1stByte = Int32.Parse(componnents[1]);
+                            }
+                            else
+                            {
+                                begginingNumber1stByte = MINDECIMAL;
+                            }
+
+                            if (iiii == Int32.Parse(componnents[5]))
+                            {
+                                endingNumber1stByte = Int32.Parse(componnents[6]);
+                            }
+                            else
+                            {
+                                endingNumber1stByte = MAXDECIMAL;
+                            }
+
+                            for (int iii = begginingNumber1stByte; iii <= endingNumber1stByte; iii++)
+                            {
+                                if (hasLoop2ndByte == false)
+                                {
+                                    begginingNumber2ndByte = Int32.Parse(componnents[2]);
+                                }
+                                else
+                                {
+                                    begginingNumber2ndByte = MINDECIMAL;
+                                }
+
+                                if (iii == Int32.Parse(componnents[6]))
+                                {
+                                    endingNumber2ndByte = Int32.Parse(componnents[7]);
+                                }
+                                else
+                                {
+                                    endingNumber2ndByte = MAXDECIMAL;
+                                }
+
+                                for (int ii = begginingNumber2ndByte; ii <= endingNumber2ndByte; ii++)
+                                {
+
+                                    if (hasLoop == false)
+                                    {
+                                        begginingNumber = Int32.Parse(componnents[3]);
+                                    }
+                                    else
+                                    {
+                                        begginingNumber = MINDECIMAL;
+                                    }
+
+                                    if ((ii == Int32.Parse(componnents[7]))&&(iii == Int32.Parse(componnents[6]))&&(iiii == Int32.Parse(componnents[5])))
+                                    {
+                                        endingNumber = Int32.Parse(componnents[8]);
+                                    }
+                                    else
+                                    {
+                                        endingNumber = MAXDECIMAL;
+                                    }
+
+                                    for (int i = begginingNumber; i <= endingNumber; i++)
+                                    {
+                                        string addressToAdd = iiii.ToString() + "." + iii.ToString() + "." + ii.ToString() + "." + i.ToString();
+                                        allAddresses.Add(addressToAdd);
+                                        //MessageBox.Show(endingNumber.ToString());
+                                    }
+                                    hasLoop = true;
+ 
+                                }
+                                hasLoop2ndByte = true;
+                                hasLoop = true;
+                            }
+                            hasLoop1stByte = true;
+                            hasLoop2ndByte = true;
+                            hasLoop = true;
+
+                        }
+                        foreach (string part in allAddresses)
+                        {
+                            MessageBox.Show(part);
                         }
 
                     }
