@@ -55,6 +55,7 @@
             this.txtS1b = new System.Windows.Forms.TextBox();
             this.lblAddress = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.listBox1 = new System.Windows.Forms.ListBox();
             this.groupRange.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
@@ -312,11 +313,21 @@
             this.groupBox1.Text = "Ajouter une adresse particulière";
             this.groupBox1.Enter += new System.EventHandler(this.groupBox1_Enter);
             // 
+            // listBox1
+            // 
+            this.listBox1.FormattingEnabled = true;
+            this.listBox1.ItemHeight = 15;
+            this.listBox1.Location = new System.Drawing.Point(635, 22);
+            this.listBox1.Name = "listBox1";
+            this.listBox1.Size = new System.Drawing.Size(260, 424);
+            this.listBox1.TabIndex = 12;
+            // 
             // frmDHCPBreaker
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(523, 485);
+            this.ClientSize = new System.Drawing.Size(1113, 485);
+            this.Controls.Add(this.listBox1);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.groupRange);
             this.Controls.Add(this.cmdNetRestart);
@@ -370,6 +381,7 @@
         private System.Windows.Forms.Label lblAddress;
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.Button cmdAddSpecific;
+        private System.Windows.Forms.ListBox listBox1;
     }
 }
 

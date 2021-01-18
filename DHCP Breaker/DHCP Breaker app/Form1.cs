@@ -10,7 +10,7 @@ namespace DHCP_Breaker_app
     public partial class frmDHCPBreaker : Form
     {
 
-        private const int MAXDECIMAL = 3;
+        private const int MAXDECIMAL = 255;
         private const int MINDECIMAL = 0;
         private ICaptureDevice device;
         
@@ -112,33 +112,73 @@ namespace DHCP_Breaker_app
 
         private void cmdStart_Click(object sender, EventArgs e)
         {
+            ManageRangeIP();
+            choice = cmbNet.SelectedIndex;
+            device = devices[choice];
+            device.OnPacketArrival += new PacketArrivalEventHandler(device_OnPacketArrival);
+            device.Open();
+            device.StartCapture();      
+        }
+
+
+
+        private void cmdStop_Click(object sender, EventArgs e)
+        {
+            device.StopCapture();
+        }
+
+        private void cmdNetRestartClick(object sender, EventArgs e)
+        {
+            Process.Start("cmd", "/K wmic path win32_networkadapter where \"NetEnabled='FALSE'\" call enable");
+        }
+
+        private void textBox2_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void textBox3_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void textBox4_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void textBox1_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void groupBox1_Enter(object sender, EventArgs e)
+        {
+
+        }
+
+        private void cmdAddSpecific_Click(object sender, EventArgs e)
+        {
+            string newAdress = txtS1b.Text + "." + txtS2b.Text + "." + txtS3b.Text + "." + txtS4b.Text;
+            lstServeurDHCP.Items.Add(newAdress);
+        }
+
+        private void cmdAddRange_Click(object sender, EventArgs e)
+        {
+            string newDeb = txtDeb1b.Text + "." + txtDeb2b.Text + "." + txtDeb3b.Text + "." + txtDeb4b.Text;
+            string newFin = txtFin1b.Text + "." + txtFin2b.Text + "." + txtFin3b.Text + "." + txtFin4b.Text;
+            string newRange = newDeb + " - " + newFin;
+            lstServeurDHCP.Items.Add(newRange);
+        }
+
+        private void ManageRangeIP()
+        {
             foreach (string item in lstServeurDHCP.Items)
             {
+                //==================================FONCTION POUR GERER LES RANGES========================================================================//
                 if (item.Contains(" - "))
                 {
                     string[] componnents = item.Split(' ', '.');
-
-                    /*foreach(string part in componnents)
-                    {
-                        MessageBox.Show(part);
-                    }*/
-
-                    /*
-                    MessageBox.Show(componnents[0]); premier octet
-                    MessageBox.Show(componnents[1]); deuxième octet
-                    MessageBox.Show(componnents[2]); troisième octet
-                    MessageBox.Show(componnents[3]); quatrième octet
-
-                    MessageBox.Show(componnents[4]); tiret
-
-                    MessageBox.Show(componnents[5]); premier octet
-                    MessageBox.Show(componnents[6]); deuxième octet
-                    MessageBox.Show(componnents[7]); troisième octet
-                    MessageBox.Show(componnents[8]); quatrième octet
-                    */
-
-
-
 
                     if (Int32.Parse(componnents[0]) == Int32.Parse(componnents[5])) //Les premiers octets des deux adresses sont identiques.
                     {
@@ -158,10 +198,11 @@ namespace DHCP_Breaker_app
                                         string addressToAdd = componnents[0] + "." + componnents[1] + "." + componnents[2] + "." + i.ToString();
                                         allAddresses.Add(addressToAdd);
                                     }
-                                    foreach (string part in allAddresses)
+                                    /*foreach (string part in allAddresses)
                                     {
                                         MessageBox.Show(part);
-                                    }
+                                        //listBox1.Items.Add(part);
+                                    }*/
                                 }
                             }
                             else
@@ -196,16 +237,17 @@ namespace DHCP_Breaker_app
                                     }
                                     hasLoop = true;
                                 }
-                                foreach (string part in allAddresses)
+                                /*foreach (string part in allAddresses)
                                 {
                                     MessageBox.Show(part);
-                                }
+                                    //listBox1.Items.Add(part);
+                                }*/
                             }
                         }
                         else
                         {
-                            MessageBox.Show("2ème octet différent");
-                            
+                            //MessageBox.Show("2ème octet différent");
+
                             bool hasLoop2ndByte = false;
                             int begginingNumber2ndByte;
                             int endingNumber2ndByte;
@@ -235,7 +277,7 @@ namespace DHCP_Breaker_app
                                 }
 
 
-                                
+
                                 for (int ii = begginingNumber2ndByte; ii <= endingNumber2ndByte; ii++)
                                 {
                                     if (hasLoop == false)
@@ -247,7 +289,7 @@ namespace DHCP_Breaker_app
                                         begginingNumber = MINDECIMAL;
                                     }
 
-                                    if (ii == Int32.Parse(componnents[7]) && (iii == Int32.Parse(componnents[6])))
+                                    if ((ii == Int32.Parse(componnents[7])) && (iii == Int32.Parse(componnents[6])))
                                     {
                                         endingNumber = Int32.Parse(componnents[8]);
                                     }
@@ -263,26 +305,23 @@ namespace DHCP_Breaker_app
                                     }
                                     hasLoop = true;
                                 }
-                                foreach (string part in allAddresses)
-                                {
-                                    MessageBox.Show(part);
-                                }
                                 hasLoop2ndByte = true;
                                 hasLoop = true;
 
-                                
+
                             }
 
-                            foreach (string part in allAddresses)
+                            /*foreach (string part in allAddresses)
                             {
                                 MessageBox.Show(part);
-                            }
+                                //listBox1.Items.Add(part);
+                            }*/
                         }
 
                     }
                     else
                     {
-                        MessageBox.Show("1er octet différent");
+                        //MessageBox.Show("1er octet différent");
                         bool hasLoop1stByte = false;
                         int begginingNumber1stByte;
                         int endingNumber1stByte;
@@ -348,7 +387,7 @@ namespace DHCP_Breaker_app
                                         begginingNumber = MINDECIMAL;
                                     }
 
-                                    if ((ii == Int32.Parse(componnents[7]))&&(iii == Int32.Parse(componnents[6]))&&(iiii == Int32.Parse(componnents[5])))
+                                    if ((ii == Int32.Parse(componnents[7])) && (iii == Int32.Parse(componnents[6])) && (iiii == Int32.Parse(componnents[5])))
                                     {
                                         endingNumber = Int32.Parse(componnents[8]);
                                     }
@@ -364,7 +403,7 @@ namespace DHCP_Breaker_app
                                         //MessageBox.Show(endingNumber.ToString());
                                     }
                                     hasLoop = true;
- 
+
                                 }
                                 hasLoop2ndByte = true;
                                 hasLoop = true;
@@ -377,6 +416,7 @@ namespace DHCP_Breaker_app
                         foreach (string part in allAddresses)
                         {
                             MessageBox.Show(part);
+                            //listBox1.Items.Add(part);
                         }
 
                     }
@@ -387,63 +427,8 @@ namespace DHCP_Breaker_app
                     MessageBox.Show(item);
                 }
             }
+            //================================== FIN FONCTION POUR GERER LES RANGES========================================================================//
 
-            choice = cmbNet.SelectedIndex;
-            device = devices[choice];
-            device.OnPacketArrival += new PacketArrivalEventHandler(device_OnPacketArrival);
-            device.Open();
-            device.StartCapture();      
-        }
-
-
-
-        private void cmdStop_Click(object sender, EventArgs e)
-        {
-            device.StopCapture();
-        }
-
-        private void cmdNetRestartClick(object sender, EventArgs e)
-        {
-            Process.Start("cmd", "/K wmic path win32_networkadapter where \"NetEnabled='FALSE'\" call enable");
-        }
-
-        private void textBox2_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void textBox3_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void textBox4_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void textBox1_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void groupBox1_Enter(object sender, EventArgs e)
-        {
-
-        }
-
-        private void cmdAddSpecific_Click(object sender, EventArgs e)
-        {
-            string newAdress = txtS1b.Text + "." + txtS2b.Text + "." + txtS3b.Text + "." + txtS4b.Text;
-            lstServeurDHCP.Items.Add(newAdress);
-        }
-
-        private void cmdAddRange_Click(object sender, EventArgs e)
-        {
-            string newDeb = txtDeb1b.Text + "." + txtDeb2b.Text + "." + txtDeb3b.Text + "." + txtDeb4b.Text;
-            string newFin = txtFin1b.Text + "." + txtFin2b.Text + "." + txtFin3b.Text + "." + txtFin4b.Text;
-            string newRange = newDeb + " - " + newFin;
-            lstServeurDHCP.Items.Add(newRange);
         }
     }
 }
