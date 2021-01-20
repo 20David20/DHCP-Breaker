@@ -40,8 +40,8 @@ namespace DHCP_Breaker_app
 
         private void device_OnPacketArrival(object sender, CaptureEventArgs e)
         {
-            
 
+            string stringToCheckInThePacket;
             var packet = PacketDotNet.Packet.ParsePacket(e.Packet.LinkLayerType, e.Packet.Data);
             if (packet is PacketDotNet.EthernetPacket)
             {
@@ -62,31 +62,29 @@ namespace DHCP_Breaker_app
                         //DETECTION PACKET DHCP
                         if (udp.ToString().Contains("DHCPMsgType: DHCP Message Type: Ack"))
                         {
-
+                            foreach(string part in allAddresses)
+                            {
+                                stringToCheckInThePacket = "DHCPServerId: Server Id: "+part;
+                                if (udp.ToString().Contains(stringToCheckInThePacket))
+                                {
+                                    MessageBox.Show("Serveur DHCP autorisé");
+                                }
+                                else
+                                {
+                                    try
+                                    {
+                                        device.StopCapture();
+                                        desactivateNetwork();
+                                        MessageBox.Show("ATTENTION, SERVEUR DHCP NON AUTORISÉ DETECTÉ \n Extinction des cartes réseaux");
+                                        break;
+                                    }
+                                    catch (ThreadAbortException)
+                                    {
+                                        // exit
+                                    }
+                                }
+                            }
                             
-                            if (udp.ToString().Contains("DHCPServerId: Server Id: 10.229.60.22"))
-                            {
-                                //Console.WriteLine();
-                                //Console.WriteLine();
-                                MessageBox.Show("Serveur DHCP autorisé");
-                                //Console.WriteLine();
-                                //Console.WriteLine();
-
-
-                              
-                            }
-                            else
-                            {
-                                try
-                                {
-                                    MessageBox.Show("ATTENTION, SERVEUR DHCP NON AUTORISÉ DETECTÉ \n Extinction des cartes réseaux");
-                                    desactivateNetwork();
-                                }
-                                catch (ThreadAbortException)
-                                {
-                                    // exit
-                                }
-                            }
                         }
                     }
                 }
@@ -94,12 +92,14 @@ namespace DHCP_Breaker_app
             }
         }
 
-
+        private void device_OnCaptureStopped(object sender, CaptureStoppedEventStatus e)
+        {
+            cmdNetRestart.Visible = true;
+            cmdNetRestart.Enabled = true;
+        }
         private void desactivateNetwork()
         {
             Process.Start("cmd", "/K wmic path win32_networkadapter where \"NetEnabled='TRUE'\" call disable");
-            cmdNetRestart.Visible = true;
-            cmdNetRestart.Enabled = true;
         }
 
 
@@ -116,6 +116,7 @@ namespace DHCP_Breaker_app
             choice = cmbNet.SelectedIndex;
             device = devices[choice];
             device.OnPacketArrival += new PacketArrivalEventHandler(device_OnPacketArrival);
+            device.OnCaptureStopped += new CaptureStoppedEventHandler(device_OnCaptureStopped);
             device.Open();
             device.StartCapture();      
         }
@@ -190,6 +191,7 @@ namespace DHCP_Breaker_app
                                 {
                                     string adresseFinal = componnents[0] + "." + componnents[1] + "." + componnents[2] + "." + componnents[3];
                                     allAddresses.Add(adresseFinal);
+                                    MessageBox.Show(adresseFinal);
                                 }
                                 else
                                 {
@@ -321,7 +323,6 @@ namespace DHCP_Breaker_app
                     }
                     else
                     {
-                        //MessageBox.Show("1er octet différent");
                         bool hasLoop1stByte = false;
                         int begginingNumber1stByte;
                         int endingNumber1stByte;
@@ -413,18 +414,18 @@ namespace DHCP_Breaker_app
                             hasLoop = true;
 
                         }
-                        foreach (string part in allAddresses)
+                        /*foreach (string part in allAddresses)
                         {
                             MessageBox.Show(part);
-                            //listBox1.Items.Add(part);
-                        }
+                            listBox1.Items.Add(part);
+                        }*/
 
                     }
                 }
                 else
                 {
                     allAddresses.Add(item);
-                    MessageBox.Show(item);
+                    //MessageBox.Show(item);
                 }
             }
             //================================== FIN FONCTION POUR GERER LES RANGES========================================================================//
