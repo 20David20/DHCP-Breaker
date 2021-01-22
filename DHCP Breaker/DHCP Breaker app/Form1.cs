@@ -40,51 +40,52 @@ namespace DHCP_Breaker_app
 
         private void device_OnPacketArrival(object sender, CaptureEventArgs e)
         {
-
+            bool isDHCPServerAccepted = false;
             string stringToCheckInThePacket;
             var packet = PacketDotNet.Packet.ParsePacket(e.Packet.LinkLayerType, e.Packet.Data);
             if (packet is PacketDotNet.EthernetPacket)
             {
-
-
                 var ip = packet.Extract<PacketDotNet.IPPacket>();
                 if (ip != null)
                 {
                     Console.WriteLine("Original IP packet: " + ip.ToString());
-
                     var udp = packet.Extract<PacketDotNet.UdpPacket>();
                     if (udp != null)
                     {
-                        //rtxtPackets.Text += "Original UDP packet: " + udp.ToString();
-
-                        //manipulate UDP parameters
-
                         //DETECTION PACKET DHCP
                         if (udp.ToString().Contains("DHCPMsgType: DHCP Message Type: Ack"))
                         {
                             foreach(string part in allAddresses)
                             {
                                 stringToCheckInThePacket = "DHCPServerId: Server Id: "+part;
+                                //MessageBox.Show(stringToCheckInThePacket);
                                 if (udp.ToString().Contains(stringToCheckInThePacket))
                                 {
-                                    MessageBox.Show("Serveur DHCP autorisé");
-                                }
-                                else
-                                {
-                                    try
-                                    {
-                                        device.StopCapture();
-                                        desactivateNetwork();
-                                        MessageBox.Show("ATTENTION, SERVEUR DHCP NON AUTORISÉ DETECTÉ \n Extinction des cartes réseaux");
-                                        break;
-                                    }
-                                    catch (ThreadAbortException)
-                                    {
-                                        // exit
-                                    }
+                                    isDHCPServerAccepted = true;
+                                    break;
                                 }
                             }
-                            
+
+                            if (isDHCPServerAccepted)
+                            {
+                                MessageBox.Show("Serveur DHCP autorisé");
+                            }
+                            else
+                            {
+                                try
+                                {
+                                    device.StopCapture();
+                                    desactivateNetwork();
+                                    MessageBox.Show("ATTENTION, SERVEUR DHCP NON AUTORISÉ DETECTÉ \n Extinction des cartes réseaux");
+                                }
+                                catch (ThreadAbortException)
+                                {
+                                    // exit
+                                }
+                            }
+
+
+
                         }
                     }
                 }
