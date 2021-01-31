@@ -208,7 +208,7 @@
           "build/netstandard2.0/NETStandard.Library.targets": {}
         }
       },
-      "PacketDotNet/1.1.1": {
+      "PacketDotNet/1.1.2": {
         "type": "package",
         "dependencies": {
           "System.Runtime.CompilerServices.Unsafe": "4.7.0"
@@ -220,10 +220,10 @@
           "lib/netstandard2.0/PacketDotNet.dll": {}
         }
       },
-      "SharpPcap/5.3.0": {
+      "SharpPcap/5.4.0": {
         "type": "package",
         "dependencies": {
-          "PacketDotNet": "1.1.1",
+          "PacketDotNet": "1.1.2",
           "System.Memory": "4.5.4"
         },
         "compile": {
@@ -724,28 +724,28 @@
         "netstandard.library.nuspec"
       ]
     },
-    "PacketDotNet/1.1.1": {
-      "sha512": "bEKckS+ATiKliA9hZcCMJqDKsGIKJngL8eHr8hd4PG3VxUXbc42/At5kI5yTEOhs0D6CCTxwpbra/5Ccvwqdgg==",
+    "PacketDotNet/1.1.2": {
+      "sha512": "UNyq8BHUZA17++FAfPswZqV5y55hW6wWThuR9JRkz6swRAbCLltaHoH0nmBG51qoQzbAcDc92cafLJMGkt5dFg==",
       "type": "package",
-      "path": "packetdotnet/1.1.1",
+      "path": "packetdotnet/1.1.2",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
         "lib/net45/PacketDotNet.dll",
         "lib/netstandard2.0/PacketDotNet.dll",
-        "packetdotnet.1.1.1.nupkg.sha512",
+        "packetdotnet.1.1.2.nupkg.sha512",
         "packetdotnet.nuspec"
       ]
     },
-    "SharpPcap/5.3.0": {
-      "sha512": "SEXdABJnNYmtiDYdFMf+I+bUOFjI3HkSmGFn3iKyC9CPlXqmkS7LR0/TzsbhzZ7IwL8b5kQMwpxSy4RZaMz8uw==",
+    "SharpPcap/5.4.0": {
+      "sha512": "ND3G6Q+WW3nZ0kfE5U8Tsy1TY2ybn5oQCvPBp5Pd9bycdHt1SrAVzpmga6J1qO0Fm58XhYrSMIfKcclWqo5Meg==",
       "type": "package",
-      "path": "sharppcap/5.3.0",
+      "path": "sharppcap/5.4.0",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
         "lib/netstandard2.0/SharpPcap.dll",
-        "sharppcap.5.3.0.nupkg.sha512",
+        "sharppcap.5.4.0.nupkg.sha512",
         "sharppcap.nuspec"
       ]
     },
@@ -801,23 +801,27 @@
   "projectFileDependencyGroups": {
     ".NETCoreApp,Version=v2.1": [
       "Microsoft.NETCore.App >= 2.1.0",
-      "SharpPcap >= 5.3.0"
+      "SharpPcap >= 5.4.0"
     ]
   },
   "packageFolders": {
-    "C:\\Users\\David.DUBEY\\.nuget\\packages\\": {}
+    "C:\\Users\\david\\.nuget\\packages\\": {},
+    "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\David.DUBEY\\Documents\\GitHub\\DHCP-Breaker\\DHCP Breaker\\DHCP Breaker\\DHCP Breaker.csproj",
+      "projectUniqueName": "C:\\Users\\david\\Documents\\GitHub\\DHCP-Breaker\\DHCP Breaker\\DHCP Breaker\\DHCP Breaker.csproj",
       "projectName": "DHCP Breaker",
-      "projectPath": "C:\\Users\\David.DUBEY\\Documents\\GitHub\\DHCP-Breaker\\DHCP Breaker\\DHCP Breaker\\DHCP Breaker.csproj",
-      "packagesPath": "C:\\Users\\David.DUBEY\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\David.DUBEY\\Documents\\GitHub\\DHCP-Breaker\\DHCP Breaker\\DHCP Breaker\\obj\\",
+      "projectPath": "C:\\Users\\david\\Documents\\GitHub\\DHCP-Breaker\\DHCP Breaker\\DHCP Breaker\\DHCP Breaker.csproj",
+      "packagesPath": "C:\\Users\\david\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\david\\Documents\\GitHub\\DHCP-Breaker\\DHCP Breaker\\DHCP Breaker\\obj\\",
       "projectStyle": "PackageReference",
+      "fallbackFolders": [
+        "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
+      ],
       "configFilePaths": [
-        "C:\\Users\\David.DUBEY\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\david\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -842,27 +846,20 @@
       "netcoreapp2.1": {
         "dependencies": {
           "Microsoft.NETCore.App": {
-            "suppressParent": "All",
             "target": "Package",
             "version": "[2.1.0, )",
             "autoReferenced": true
           },
           "SharpPcap": {
             "target": "Package",
-            "version": "[5.3.0, )"
+            "version": "[5.4.0, )"
           }
         },
         "imports": [
-          "net461",
-          "net462",
-          "net47",
-          "net471",
-          "net472",
-          "net48"
+          "net461"
         ],
         "assetTargetFallback": true,
-        "warn": true,
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.402\\RuntimeIdentifierGraph.json"
+        "warn": true
       }
     }
   }

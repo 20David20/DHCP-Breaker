@@ -1,39 +1,39 @@
 {
   "runtimeTarget": {
     "name": ".NETCoreApp,Version=v2.1",
-    "signature": ""
+    "signature": "a2cf5be9eee4926443a0bc1a477db2df9f322bce"
   },
   "compilationOptions": {},
   "targets": {
     ".NETCoreApp,Version=v2.1": {
       "DHCP Breaker/1.0.0": {
         "dependencies": {
-          "SharpPcap": "5.3.0"
+          "SharpPcap": "5.4.0"
         },
         "runtime": {
           "DHCP Breaker.dll": {}
         }
       },
-      "PacketDotNet/1.1.1": {
+      "PacketDotNet/1.1.2": {
         "dependencies": {
           "System.Runtime.CompilerServices.Unsafe": "4.7.0"
         },
         "runtime": {
           "lib/netstandard2.0/PacketDotNet.dll": {
-            "assemblyVersion": "1.1.1.0",
-            "fileVersion": "1.1.1.0"
+            "assemblyVersion": "1.1.2.0",
+            "fileVersion": "1.1.2.0"
           }
         }
       },
-      "SharpPcap/5.3.0": {
+      "SharpPcap/5.4.0": {
         "dependencies": {
-          "PacketDotNet": "1.1.1",
+          "PacketDotNet": "1.1.2",
           "System.Memory": "4.5.4"
         },
         "runtime": {
           "lib/netstandard2.0/SharpPcap.dll": {
-            "assemblyVersion": "5.3.0.0",
-            "fileVersion": "5.3.0.0"
+            "assemblyVersion": "5.4.0.0",
+            "fileVersion": "5.4.0.0"
           }
         }
       },
@@ -54,19 +54,19 @@
       "serviceable": false,
       "sha512": ""
     },
-    "PacketDotNet/1.1.1": {
+    "PacketDotNet/1.1.2": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-bEKckS+ATiKliA9hZcCMJqDKsGIKJngL8eHr8hd4PG3VxUXbc42/At5kI5yTEOhs0D6CCTxwpbra/5Ccvwqdgg==",
-      "path": "packetdotnet/1.1.1",
-      "hashPath": "packetdotnet.1.1.1.nupkg.sha512"
+      "sha512": "sha512-UNyq8BHUZA17++FAfPswZqV5y55hW6wWThuR9JRkz6swRAbCLltaHoH0nmBG51qoQzbAcDc92cafLJMGkt5dFg==",
+      "path": "packetdotnet/1.1.2",
+      "hashPath": "packetdotnet.1.1.2.nupkg.sha512"
     },
-    "SharpPcap/5.3.0": {
+    "SharpPcap/5.4.0": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-SEXdABJnNYmtiDYdFMf+I+bUOFjI3HkSmGFn3iKyC9CPlXqmkS7LR0/TzsbhzZ7IwL8b5kQMwpxSy4RZaMz8uw==",
-      "path": "sharppcap/5.3.0",
-      "hashPath": "sharppcap.5.3.0.nupkg.sha512"
+      "sha512": "sha512-ND3G6Q+WW3nZ0kfE5U8Tsy1TY2ybn5oQCvPBp5Pd9bycdHt1SrAVzpmga6J1qO0Fm58XhYrSMIfKcclWqo5Meg==",
+      "path": "sharppcap/5.4.0",
+      "hashPath": "sharppcap.5.4.0.nupkg.sha512"
     },
     "System.Memory/4.5.4": {
       "type": "package",
